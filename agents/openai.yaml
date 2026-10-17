@@ -1,0 +1,4 @@
+interface:
+  display_name: "Black-box Web Recon"
+  short_description: "Measure authorized web-app behavior reconstruction"
+  default_prompt: "Use $blackbox-web-recon to plan an authorized self-audit with isolated blind reviewers and a fixed scoring inventory."

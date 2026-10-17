@@ -1,0 +1,35 @@
+# Local interpreter/editor files
+__pycache__/
+*.py[cod]
+.venv/
+.DS_Store
+.idea/
+.vscode/
+
+# Experiment state and secrets never belong in this skill repository.
+.env
+.env.*
+.runtime/
+.audit/
+audit/
+reports/
+captures/
+mailbox/
+setup-private/
+scoring-private/
+archive-private/
+blind/
+credentials*
+creds*
+*.cookies
+*.cookie
+*.sqlite*
+*.db
+*.db-*
+*.pem
+*.key
+*.p12
+*.log
+scores*.json
+behavior-*.md
+round-*.md
