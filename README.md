@@ -1,4 +1,4 @@
-# blackbox-web-recon
+# web-rea
 
 A reusable skill for measuring how much of an authorized web app's behavior can be reconstructed through HTTP alone.
 
