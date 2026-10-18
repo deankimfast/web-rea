@@ -1,4 +1,4 @@
-# blackbox-web-recon
+# web-rea
 
 A reusable skill and skills-only plugin for measuring how much of an authorized web app's behavior can be reconstructed through HTTP alone. Includes Claude Code packaging and a portable ChatGPT/Codex package, while preserving the root standalone skill.
 
