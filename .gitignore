@@ -5,6 +5,7 @@ __pycache__/
 .DS_Store
 .idea/
 .vscode/
+dist/
 
 # Experiment state and secrets never belong in this skill repository.
 .env

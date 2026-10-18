@@ -1,6 +1,6 @@
 # blackbox-web-recon
 
-A reusable skill for measuring how much of an authorized web app's behavior can be reconstructed through HTTP alone.
+A reusable skill and skills-only plugin for measuring how much of an authorized web app's behavior can be reconstructed through HTTP alone. Includes Claude Code packaging and a portable ChatGPT/Codex package, while preserving the root standalone skill.
 
 **Use only on systems you own or are explicitly authorized to test.** The output is an owner-facing coverage and gap report. Stateful tests use a disposable local instance with fictional accounts and isolated providers.
 
@@ -13,11 +13,20 @@ A reusable skill for measuring how much of an authorized web app's behavior can 
 
 The originating five-round exercise plateaued around 50–60% after round three. Later gains depended heavily on hints leaking answers. The skill treats 50–65% as a practical planning expectation from that experience, not a general benchmark. Login lockout and spam auto-block were especially difficult; email-dependent rules required a local SMTP sink.
 
-## Use with Claude Code or ChatGPT
+## Install as a Claude Code plugin
 
-Start with [SKILL.md](SKILL.md). The same Markdown instructions and relative references support either host. Load this folder through your host's supported skill mechanism, or provide the instructions and referenced files to the conversations performing the roles.
+```sh
+claude plugin marketplace add deankimfast/web-rea
+claude plugin install blackbox-web-recon@web-rea
+```
 
-The host or human operator must provide an authorized curl runner, report writing, source access for scoring, and isolated contexts. In a chat-only setup, use the manual handoffs in [runtime separation](references/runtime-separation.md): a fresh blind conversation, a separate source-aware scoring conversation, and an orchestrator exchanging sanitized numeric results. Do not put the source into the blind conversation. A skill file cannot enforce tool or filesystem restrictions.
+Invoke `/blackbox-web-recon:blackbox-web-recon` in a new session. See [installation and package builds](docs/installation.md) for local development and validation.
+
+## ChatGPT / Codex plugin and standalone use
+
+The portable `plugin.json`, bundled `skills/blackbox-web-recon/`, and local `.agents/plugins/marketplace.json` catalog support OpenAI's documented package format. In supported ChatGPT desktop local environments, open this cloned repository as a project, restart to refresh local marketplace discovery, and select the `web-rea` source in the Plugins Directory. A distributable OpenAI ZIP can also be built offline. Public directory submission/review is a separate step; this plugin has not been submitted, approved or listed. Details and official references are in [installation](docs/installation.md).
+
+For standalone use, start with root [SKILL.md](SKILL.md). It remains the canonical skill with its relative references and calculator. The host or human operator supplies an authorized curl runner, report writing, source access for scoring, and isolated contexts. In a chat-only setup, follow [runtime separation](references/runtime-separation.md). Do not put source into the blind conversation. Packaging supplies instructions, not isolation or new execution permissions.
 
 An example starting request:
 
@@ -33,19 +42,31 @@ blackbox-web-recon/
 ├── README.md
 ├── SKILL.md
 ├── .gitignore
+├── plugin.json
+├── .claude-plugin/
+│   ├── plugin.json
+│   └── marketplace.json
+├── .agents/plugins/marketplace.json
 ├── agents/
 │   └── openai.yaml
+├── docs/
+│   └── installation.md
 ├── references/
 │   ├── local-setup.md
 │   ├── pitfalls.md
 │   ├── role-prompts.md
 │   ├── rule-inventory.md
 │   └── runtime-separation.md
-└── scripts/
-    └── calculate_coverage.py
+├── scripts/
+│   ├── calculate_coverage.py
+│   └── build_packages.py
+└── skills/
+    └── blackbox-web-recon/   # generated copy of the standalone skill
 ```
 
 The references cover disposable databases and SMTP capture, blind isolation, stable rule inventories, scorer cross-checks, feedback contamination and role prompts. `agents/openai.yaml` is optional UI metadata for hosts that understand it.
+
+Build the three allowlisted ZIPs with `python3 scripts/build_packages.py` (Python 3.9+). They are written to ignored `dist/`; `--check` verifies that committed bundled skill files match the root skill without writing anything. There are no MCP servers, lifecycle hooks, installer scripts or automatic target requests.
 
 ## Offline coverage calculator
 
@@ -67,7 +88,7 @@ Wrong rules remain in the denominator and are not also counted as missed. The ca
 
 ## Contributing and publishing
 
-Keep contributions generic and reproducible. Document changes to rule granularity, scoring or feedback policy, since these affect comparisons across rounds. Use synthetic offline examples to check the calculator and inspect relative links after editing the skill.
+Keep contributions generic and reproducible. Document changes to rule granularity, scoring or feedback policy, since these affect comparisons across rounds. Use synthetic offline examples to check the calculator and inspect relative links after editing the skill. Edit canonical root skill files, then rerun `python3 scripts/build_packages.py` and commit the updated bundled copy. Keep both plugin versions synchronized; validate with `python3 scripts/build_packages.py --check` and the host's plugin validator.
 
 This repository contains only reusable instructions and helper code. Keep target-specific source, private inventories, reports, captured assets, credentials and mailbox contents outside it. The ignore file reduces accidental additions; review the tracked file list and every change before publishing.
 

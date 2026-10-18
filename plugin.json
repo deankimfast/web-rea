@@ -1,0 +1,25 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "blackbox-web-recon",
+  "version": "0.1.0",
+  "description": "Authorized HTTP-only app behavior reconstruction with blind reviewers and fixed, independently checked scoring.",
+  "author": { "name": "deankimfast" },
+  "homepage": "https://github.com/deankimfast/web-rea",
+  "repository": "https://github.com/deankimfast/web-rea",
+  "license": "MIT",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Black-box Web Recon",
+        "shortDescription": "Measure authorized web-app behavior reconstruction",
+        "longDescription": "Assess HTTP-visible behavior using fresh blind reviewers, a fixed scoring inventory, counts-only feedback, and explicit authorization boundaries. Requires an owner-controlled test environment and host-provided tools.",
+        "developerName": "deankimfast",
+        "websiteURL": "https://github.com/deankimfast/web-rea",
+        "defaultPrompt": [
+          "Use Black-box Web Recon to plan a scoped self-audit of my own local test app.",
+          "Use Black-box Web Recon to compare sanitized blind findings against a fixed rule inventory."
+        ]
+      }
+    }
+  }
+}

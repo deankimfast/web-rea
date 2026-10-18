@@ -1,0 +1,12 @@
+{
+  "name": "web-rea",
+  "description": "Authorized web-app reconstruction workflows with blind reviewers and fixed scoring.",
+  "owner": { "name": "deankimfast" },
+  "plugins": [
+    {
+      "name": "blackbox-web-recon",
+      "source": "./",
+      "description": "Authorized black-box web reconstruction and coverage assessment."
+    }
+  ]
+}

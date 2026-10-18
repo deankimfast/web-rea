@@ -1,0 +1,9 @@
+{
+  "name": "blackbox-web-recon",
+  "version": "0.1.0",
+  "description": "Authorized HTTP-only app behavior reconstruction with blind reviewers and fixed, independently checked scoring.",
+  "author": { "name": "deankimfast" },
+  "homepage": "https://github.com/deankimfast/web-rea",
+  "repository": "https://github.com/deankimfast/web-rea",
+  "license": "MIT"
+}
